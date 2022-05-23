@@ -1,0 +1,51 @@
+<!-- <div class="container  text-center mt-5 mb-5">
+  <h1>Bootstrap 5 is working fine with Angular 12!!</h1>
+</div> -->
+
+<body>
+    <app-navbar></app-navbar>
+
+    <div id="centerDiv" class="row">
+        <div id="leftDiv" class="leftCol">
+            <div class="login-card"><img class="profile-img-card" src="assets/img/mentorICCCON.jpeg">
+                <form class="form-signin" #mentorLoginForm="ngForm" (ngSubmit)="processMentorLogin(mentorLoginForm.value)">
+                    <span class="reauth-email"></span>
+                    <input ngModel #mentorLoginId="ngModel" name="mentorLoginId" class="form-control" type="email" id="inputEmail-1" required="" placeholder="Mentor Login ID" autofocus="">
+                    <span *ngIf="mentorLoginId.invalid && mentorLoginId.touched" style="color: red;">Please enter a ID</span>
+                    <input ngModel #mentorLoginPassword="ngModel" name="mentorLoginPassword" class="form-control" type="password" id="inputPassword-1" required="" placeholder="Password">
+                    <span *ngIf="mentorLoginPassword.invalid && mentorLoginPassword.touched" style="color: red;">Please enter a Password</span>
+                    <div class="checkbox"></div>
+                    <button class="btn btn-primary btn-lg d-block btn-signin w-100"
+                        type="submit" [disabled]="mentorLoginForm.invalid">LOGIN</button>
+                </form>
+                <div class="row">
+                    <div class="col" id="mentorButtonsCol"><button class="btn btn-primary fs-6" id="newMentorButton"
+                            type="button" (click)="loadRegistrationPage()">
+                            <!-- <a routerLink="mentor/mentorRegistration"> -->
+                                NEW MENTOR ?</button><button class="btn btn-primary fs-6"
+                            id="mentorResetButton" type="reset" (click)="mentorLoginForm.reset()">RESET</button></div>
+                </div>
+            </div>
+        </div>
+        <div id="rightDiv" class="rightCol">
+            <div class="login-card"><img class="profile-img-card" src="assets/img/internICOOOON.png">
+                <form class="form-signin" #internLoginForm="ngForm" (ngSubmit)="processInternLogin(internLoginForm.value)">
+                    <span class="reauth-email"> </span>
+                    <input ngModel #internLoginId="ngModel" name="internLoginId" class="form-control" type="email" id="inputEmail" required="" placeholder="Intern Login ID" autofocus="">
+                    <span *ngIf="internLoginId.invalid && internLoginId.touched" style="color: red;">Please enter a ID</span>
+                    <input ngModel #internLoginPassword="ngModel" name="internLoginPassword" class="form-control" type="password" id="inputPassword" required="" placeholder="Password">
+                    <span *ngIf="internLoginPassword.invalid && internLoginPassword.touched" style="color: red;">Please enter a Password</span>
+                    <!-- <div class="checkbox"></div> -->
+                    <button class="btn btn-primary btn-lg d-block btn-signin w-100" type="submit" [disabled]="internLoginForm.invalid">LOGIN</button>
+                </form>
+                <div class="row">
+                    <div class="col"><button class="btn btn-primary fs-6" id="newIntern" type="button"><a routerLink="intern/internRegistration"> NEW INTERN?</a></button><button class="btn btn-primary fs-6" id="internResetButton"
+                            type="reset" (click)="internLoginForm.reset()" >RESET</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<router-outlet></router-outlet>

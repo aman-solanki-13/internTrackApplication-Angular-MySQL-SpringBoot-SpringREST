@@ -1,0 +1,70 @@
+<body>
+    <nav class="navbar navbar-light navbar-expand-md">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">intern track application</a><button data-bs-toggle="collapse"
+                class="navbar-toggler" data-bs-target="#navcol-1">
+                <span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">First Item</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">Second Item</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Third Item</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="mentorCenterDiv" class="row">
+        <div id="registerRow" class="row register-form" background="/assets/img/background-2.jpg" width="100%"
+            height="100%">
+            <div class="col-md-8 offset-md-2">
+                <form #mentorRegistrationForm="ngForm" (ngSubmit)="processMentorRegistration(mentorRegistrationForm.value, mentorRegistrationForm)" class="custom-form" style="width: 100vh">
+                    <h1>Mentor Register Form</h1>
+                    <div class="row form-group">
+                        <div class="col-sm-6 input-column">
+                            <input name="mentorName" required="" ngModel #mentorName="ngModel" class="form-control" type="text" placeholder="Enter Name"/>
+                            <span *ngIf="mentorName.invalid && mentorName.touched" style="color: red;">Please enter a Name</span>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-6 input-column">
+                            <input name="mentorId" required="" ngModel #mentorId="ngModel" class="form-control" type="email" placeholder="Enter EmailId" />
+                            <span *ngIf="mentorId.invalid && mentorId.touched" style="color: red;">Please enter a Id</span>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-6 input-column">
+                            <input name="mentorPassword" required="" ngModel #mentorPassword="ngModel" class="form-control" type="password" placeholder="Enter Password"/>
+                            <span *ngIf="mentorPassword.invalid && mentorPassword.touched" style="color: red;">Please enter Password</span>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-6 input-column">
+                            <input name="mentorReEnterPassword" required="" ngModel #mentorReEnterPassword="ngModel" class="form-control" type="password" placeholder="Re-enter Password"/>
+                            <span *ngIf="mentorReEnterPassword.invalid && mentorReEnterPassword.touched" style="color: red;">Please Re-enter password</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-sm-4 label-column">
+                            <label id="mentorOfLabel" class="col-form-label">MENTOR OF</label>
+                        </div>
+                        <div class="col col-sm-6 input-column">
+                            <div class="dropdown">
+                                <select required="" ngModel name="mentorOf" #mentorOf="ngModel" (change)="selectChangeHandler($event)" style="width: 25vh; height: 7vh;">
+                                    <option value="" disabled selected>Select your option</option>
+                                    <option *ngFor="let Category of allInternsWithoutMentor" [value]="Category.internId">{{Category.internName}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button [disabled]="mentorRegistrationForm.invalid" id="submitButton" class="btn btn-primary" type="submit-button">
+                        Submit Form
+                    </button>
+                </form>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+</body>

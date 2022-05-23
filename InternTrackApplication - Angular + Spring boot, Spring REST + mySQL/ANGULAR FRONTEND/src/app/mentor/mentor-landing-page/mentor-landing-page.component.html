@@ -1,0 +1,82 @@
+<body>
+    <nav class="navbar navbar-light navbar-expand-md">
+        <div class="container-fluid"><a class="navbar-brand" href="#">INTERN TRACK APPLICATION</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">First Item</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Second Item</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Third Item</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="mentorCenterDiv" class="row">
+        <div id="mentorLeftDiv" class="leftCol">
+            <button (click)="showInternDetailDiv()" (click)="showInternDetails()" class="btn btn-primary" id="showInternDetails" type="button">intern detail</button>
+            <button (click)="showAssignmentStatusDiv()" (click)="showAllAssignments()" class="btn btn-primary" id="assignmentStatus" type="button">assginment status</button>
+            <button (click)="showGiveAssignmentDiv()" class="btn btn-primary" id="giveAssignment" type="button">give assignment</button>
+            <button (click)="showDailyStatusDiv()" (click)="showAllDailyStatusOfIntern()" class="btn btn-primary" id="viewDailyStatus" type="button">view daily status</button>
+            <button  class="btn btn-primary logoutButton" type="button"><a routerLink="">logout</a></button></div>
+            
+        <div id="mentorRightDiv" class="rightCol">
+            <h1 id="mentorWelcomeHeader">WELCOME: {{mentorId}}</h1>
+            <div [hidden]="isInternDetailDivShown" id="internDetailDiv">
+                <!-- <input disabled type="text" id="nameInput" class="internDetailField" value="{{intern[0].internId}}">
+                <input disabled type="url" id="emailDetail" class="internDetailField" value="{{intern[0].internName}}">
+                <input disabled type="text" id="genderDetail" class="internDetailField" value="{{intern[0].internGender}}"> -->
+            </div>
+            <div [hidden]="isAssignmentStatusDivShown" id="assignmentStatusDiv">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Given To</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                         <tr *ngFor="let assignment of allAssignmentsOfIntern">
+                            <th scope="row">{{assignment.assignmentID}}</th>
+                            <td>{{assignment.assignmentName}}</td>
+                            <td>{{assignment.givenTo}}</td>
+                            <td>{{assignment.assignmentStatus}}</td>
+                            <td>{{assignment.assignmentDateTime}}</td>
+                         </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div [hidden]="isGiveAssignmentDivShown" id="giveAssignmentDiv">
+                <form  #giveAssignmentForm="ngForm" id="giveAssignmentForm" (ngSubmit)="giveAssignment(giveAssignmentForm.value, giveAssignmentForm)">
+                    <label class="form-label" id="assignmentLabel">Assignment:&nbsp;&nbsp;</label>
+                    <textarea ngModel  required="" name="assignmentTextArea" class="form-control" id="giveAssignmentTextarea"></textarea>
+                    <button [disabled]="giveAssignmentForm.invalid" class="btn btn-primary" id="assignmentSubmitButton" type="submit">submit</button>
+                </form>
+            </div>
+            <div [hidden]="isViewDailyStatusDivShown" id="viewDailyStatusDiv">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Status</th>
+    <!-- <%--                    <th scope="col">Status of</th>--%> -->
+                        <th scope="col">Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dailyStatus of allDailyStatusOfIntern">
+                            <th scope="row">{{dailyStatus.id}}</th>
+                            <td>{{dailyStatus.dailyStatus}}</td>
+    <!-- <%--                        <td>{{dailyStaus.statusOf}</td>--%> -->
+                            <td>{{dailyStatus.statusDateTime}}</td>
+                        </tr>
+                    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+<router-outlet></router-outlet>

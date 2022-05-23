@@ -1,0 +1,87 @@
+<body>
+    <nav class="navbar navbar-light navbar-expand-md">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">intern track application</a><button data-bs-toggle="collapse"
+                class="navbar-toggler" data-bs-target="#navcol-1">
+                <span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">First Item</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">Second Item</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Third Item</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="internCenterDiv" class="row">
+        <div id="internLeftDiv" class="leftCol">
+            <button (click)="showDailyStatusDiv()" class="btn btn-primary asideButtons" type="button">Daily status</button>
+            <button (click)="showCompletedAssignmentDiv()" (click)="setAssignmentValues()" class="btn btn-primary asideButtons" type="button">completed assigns</button>
+            <button (click)="showIncompleteAssignmentDiv()" (click)="setAssignmentValues()" class="btn btn-primary asideButtons" type="button"> incomplete assigns</button>
+            <button class="btn btn-primary logoutButton" type="button"><a routerLink="">logout</a></button>
+        </div>
+        <div id="internRightDiv" class="rightCol">
+            <h1 id="internWelcomeHeader">Welcome:{{internId}}&nbsp;</h1>
+            <div [hidden]="isDailyStatusDivShown" id="dailyStatusDiv">
+                <form #dailyStatusForm="ngForm" (ngSubmit)="uploadDailyStatus(dailyStatusForm.value, dailyStatusForm)">
+                <label class="form-label" id="dailyStatusLabel">Daily Status :&nbsp;</label>
+                <span *ngIf="dailyStatusTextArea.invalid && dailyStatusTextArea.touched">Please enter Daily Status</span>
+                <textarea required="" ngModel #dailyStatusTextArea="ngModel" name="dailyStatusText" id="dailyStatusFieldLabel" style="height: 20vh;"></textarea>
+                <button [disabled]="dailyStatusForm.invalid" class="btn btn-primary" id="statusSubmitButton" type="submit">Button</button>
+            </form>
+            </div>
+            <div [hidden]="isCompletedAssignmentDivShown" id="completedAssignmentDiv" >
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Given By</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                         <tr *ngFor="let assignment of allCompleteAssignmentsOfIntern">
+                            <th scope="row">{{assignment.assignmentID}}</th>
+                            <td>{{assignment.assignmentName}}</td>
+                            <td>{{assignment.givenBy}}</td>
+                            <td>{{assignment.assignmentStatus}}</td>
+                            <td>{{assignment.assignmentDateTime}}</td>
+                         </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div [hidden]="isIncompleteAssignmentDivShown" id="incompleteAssignmentDiv" class="displayDiv">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Given By</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Mark Complete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                       <tr *ngFor="let assignment of allIncompleteAssignmentsOfIntern">
+                            <th scope="row">{{assignment.assignmentID}}</th>
+                            <td>{{assignment.assignmentName}}</td>
+                            <td>{{assignment.givenBy}}</td>
+                            <td>{{assignment.assignmentStatus}}</td>
+                            <td>{{assignment.assignmentDateTime}}</td>
+                            <td><button (click)="markAssignmentComplete(assignment.assignmentID)">Mark Completed</button></td>
+                         </tr>
+                    </tbody>
+                </table>
+            
+            </div>
+        </div>
+    </div>
+</body>
+
+<router-outlet></router-outlet>
